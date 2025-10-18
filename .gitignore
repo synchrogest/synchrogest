@@ -1,0 +1,112 @@
+# ================================
+# BACKEND - PYTHON / FASTAPI
+# ================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Configs e credenciais
+.env
+.envrc
+.env.local
+*.sqlite3
+*.db
+gerar_hash.py
+config.py
+
+# Logs
+*.log
+logs/
+*.pid
+celerybeat-schedule
+
+# PyInstaller
+*.spec
+
+# Testes / Cobertura
+.coverage
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+.tox/
+.nox/
+cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# ================================
+# FRONTEND - REACT
+# ================================
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# Build output
+build/
+dist/
+
+# Ambiente local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cache do React
+.cache/
+*.tmp
+
+# ================================
+# SUPABASE
+# ================================
+.supabase/
+
+<<<<<<< HEAD
+# ================================
+# SISTEMA / DEPLOY
+# ================================
+.vercel/
+.tmp/
+uploads/
+=======
+# PyPI configuration file
+.pypirc
+
+# Cursor
+#  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to
+#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
+#  refer to https://docs.cursor.com/context/ignore-files
+.cursorignore
+.cursorindexingignore
+
+# Marimo
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+
+# Arquivos específicos do projeto que não devem ir para o Git
+scripts/criar_admin.py
+scripts/check_admin_db.py
+app/gerar_hash.py
+initial_data.py
+.env.local
+>>>>>>> bc5a6bbd3056897c76cbebfb64532378a4743678
