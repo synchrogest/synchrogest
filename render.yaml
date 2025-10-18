@@ -1,7 +1,7 @@
 # render.yaml - Deploy completo do SynchroGest
 services:
   - type: web
-    name: synchrogest-backend
+    name: synchrogest
     env: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
