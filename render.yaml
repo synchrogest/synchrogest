@@ -12,7 +12,7 @@ services:
           name: synchrogest-db
           property: connectionString
       - key: PYTHON_VERSION
-        value: 3.11
+        value: 3.11.9
       - key: SECRET_KEY
         value: "chave-super-secreta-synchrogest"
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
