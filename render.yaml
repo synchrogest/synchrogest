@@ -5,16 +5,17 @@ services:
     env: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATABASE_URL
+        value: "postgresql://synchrogest:OQA7Ms1ZNKqhX9yHhr2aYhkWnOUzbzZR@dpg-d3ple7ali9vc73bm55b0-a.frankfurt-postgres.render.com/synchrogest"
         fromDatabase:
           name: synchrogest-db
           property: connectionString
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: SECRET_KEY
-        value: "chave-super-secreta-synchrogest"
+        value: "sg2025iniT"
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "60"
     plan: free
