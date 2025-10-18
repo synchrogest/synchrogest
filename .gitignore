@@ -22,7 +22,6 @@ venv.bak/
 *.sqlite3
 *.db
 gerar_hash.py
-config.py
 
 # Logs
 *.log
