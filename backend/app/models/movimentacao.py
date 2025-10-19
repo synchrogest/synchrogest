@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database import Base
+from sqlalchemy.dialects.postgresql import ENUM as PGEnum
 
 class Movimentacao(Base):
     __tablename__ = "movimentacoes"
@@ -9,7 +10,7 @@ class Movimentacao(Base):
     id = Column(Integer, primary_key=True, index=True)
     produto_id = Column(Integer, ForeignKey("produtos.id"), nullable=False)
     usuario_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
-    tipo = Column(Enum("entrada", "saida"), nullable=False)
+    tipo = Column(PGEnum("entrada", "saida", name="tipo_enum"), nullable=False)
     quantidade = Column(Integer, nullable=False)
     data = Column(DateTime, default=datetime.utcnow)
     observacoes = Column(Text, nullable=True)

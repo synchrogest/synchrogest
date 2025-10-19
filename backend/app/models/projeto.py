@@ -1,8 +1,10 @@
 
+
 from sqlalchemy import Column, Integer, String, Text, Date, DateTime, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database import Base
+from sqlalchemy.dialects.postgresql import ENUM as PGEnum
 
 class Projeto(Base):
     __tablename__ = "projetos"
@@ -13,7 +15,7 @@ class Projeto(Base):
     data_inicio = Column(Date, nullable=False)
     data_fim = Column(Date, nullable=True)
     responsavel_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
-    status = Column(Enum("planejamento", "em_andamento", "concluido", "cancelado"), default="planejamento")
+    status = Column(PGEnum("planejamento", "em_andamento", "concluido", "cancelado", name="status_enum"), default="planejamento")
     descricao = Column(Text, nullable=True)
     data_criacao = Column(DateTime, default=datetime.utcnow)
     data_atualizacao = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
