@@ -2,7 +2,7 @@ services:
   - type: web
     name: synchrogest-app
     env: python
-    runtime: "python-3.11" 
+    runtime: "python-3.11.11" 
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT
