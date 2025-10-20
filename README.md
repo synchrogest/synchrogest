@@ -47,8 +47,11 @@ Acesso: https://synchrogest-app.onrender.com/docs
 1. EX: Use o endpoint `POST /api/auth/login` para fazer login com **email** e **senha**.
 * 1.1 username: user@synchrogest.com
 * 1.2 password: user1234
-2. Retorna: "access_token": EX: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzUwNDIwNzA1fQ.Y2mI1sva7UHn5ah2HJVO4XzU6UrQNxFEtPyRb5OlvL8",
-  "token_type": "bearer"
+2. Retorna: 
+
+"access_token": EX: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzUwNDIwNzA1fQ.Y2mI1sva7UHn5ah2HJVO4XzU6UrQNxFEtPyRb5OlvL8",
+
+"token_type": "bearer"
 
 ## Testar com Postman
 
@@ -68,6 +71,7 @@ POST https://synchrogest-app.onrender.com/docs#/Autentica%C3%A7%C3%A3o/login_for
 
 * Selecione x-www-form-urlencoded.
 * Adicione dois campos:
+
 Key → username → value: usuário = 'user@synchrogest.com'
 
 Key → password → value: senha = 'user1234'
