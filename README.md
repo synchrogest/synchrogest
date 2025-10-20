@@ -38,34 +38,40 @@ Acesso: https://synchrogest-app.onrender.com/docs
 ### Instruções para Autorização
 
 1. Clique em: Authoraze
-1.1 Preencha usaename: user@synchrogest.com
-1.2 Preencha password: user1234
-1.3 Clique em Authoraze para validar as credenciais
+* 1.1 Preencha username: user@synchrogest.com
+* 1.2 Preencha password: user1234
+* 1.3 Clique em Authoraze para validar as credenciais
 
 ### Instruções para autenticação:
 
 1. EX: Use o endpoint `POST /api/auth/login` para fazer login com **email** e **senha**.
-1.1 username: user@synchrogest.com
-1.2 password: user1234
+* 1.1 username: user@synchrogest.com
+* 1.2 password: user1234
 2. Retorna: "access_token": EX: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzUwNDIwNzA1fQ.Y2mI1sva7UHn5ah2HJVO4XzU6UrQNxFEtPyRb5OlvL8",
   "token_type": "bearer"
 
 ## Testar com Postman
 
-Acesse no navegador: https://synchrogest-app.onrender.com/docs (Swagger)
-Clique em: openapi.json
-Salve como synchrogestapi.json
+* Acesse no navegador: https://synchrogest-app.onrender.com/docs (Swagger)
+* Clique em: openapi.json
+* Salve como synchrogestapi.json
+
 “Importar” > “Arquivo” > (importe do diretório escolhido para armazenar, o arquivo: synchrogestapi.json )
 
 ### Instruções para autenticação:
 
 POST https://synchrogest-app.onrender.com/docs#/Autentica%C3%A7%C3%A3o/login_for_access_token_api_auth_login_post
-O corpo da requisição não será JSON, e sim do tipo x-www-form-urlencoded.
-Vá até a aba “Body”.
-Selecione x-www-form-urlencoded.
-Adicione dois campos:
+
+* O corpo da requisição não será JSON, e sim do tipo x-www-form-urlencoded.
+
+* Vá até a aba “Body”.
+
+* Selecione x-www-form-urlencoded.
+* Adicione dois campos:
 Key → username → value: usuário = 'user@synchrogest.com'
+
 Key → password → value: senha = 'user1234'
+
 Clique em "SEND" e aparecerá o <token> da requisição e status 200.
 "token_type": bearer 
 
