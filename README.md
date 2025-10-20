@@ -1,6 +1,6 @@
 # SYNCHROGEST - Sistema de Gestão
 
-Este repositório contém o código-fonte completo da aplicação SynchroGest, incluindo o frontend (React) e o backend (FastAPI), organizado para ambiente de deprodução simulando um projeto real para ser utilizados por Testers e QA`s.
+Este repositório contém o código-fonte completo da aplicação SynchroGest, incluindo o frontend (React) e o backend (FastAPI), organizado para ambiente de desenvolvimento simulando um projeto real para ser utilizados por Testers e QA`s.
 ---
 ## Estrutura do Projeto
 
