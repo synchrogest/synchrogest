@@ -1,11 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 
-// Criar instância do axios
-// A baseURL será tratada pelo proxy configurado no package.json
+let base = process.env.REACT_APP_API_URL || "";
+// Remove qualquer barra final para evitar "//api"
+if (base.endsWith("/")) {
+  base = base.slice(0, -1);
+}
+
 const api = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}/api`, // Usar URL relativa para o proxy funcionar
-  maxRedirects: 5,  // Permitir até 5 redirecionamentos
-  withCredentials: true  // Importante para preservar cookies em redirecionamentos
+  baseURL: `${base}/api`,
+  maxRedirects: 5,
+  withCredentials: true,
 });
 
 // Preserva cabeçalhos em redirecionamentos
