@@ -6,9 +6,11 @@ if (base.endsWith("/")) {
   base = base.slice(0, -1);
 }
 
+// Adiciona /api como base para todas as requisições
 const api = axios.create({
-  baseURL: base,
+  baseURL: `${base}/api`,
   timeout: 15000, // 15s para evitar travamentos
+  withCredentials: true, // Importante se usar cookies
 });
 
 // Interceptor: adiciona o token em todas as requisições
@@ -41,5 +43,22 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+/**
+ * Função auxiliar para login (FastAPI espera x-www-form-urlencoded)
+ */
+export const login = async (email, password) => {
+  const data = new URLSearchParams();
+  data.append("username", email); // FastAPI espera "username"
+  data.append("password", password);
+
+  const response = await api.post("/auth/login", data, {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  });
+
+  return response.data;
+};
 
 export default api;
