@@ -171,7 +171,7 @@ Validação:
 Código HTTP 200
 
 access_token presente e formato JWT válido
----
+
 ## 2. FRONTEND - Formulário de Cadastro de Usuário
 
 Objetivo: Testar criação de novo usuário via frontend.
@@ -201,7 +201,7 @@ Validação:
 Verificar tabela usuarios no banco de dados
 
 Confirmação visual no frontend
----
+
 ## 3. FLUXO DE USUÁRIO - Login/Admin
 
 Objetivo: Verificar acesso restrito por nível de usuário.
@@ -223,7 +223,7 @@ Validação:
 Status HTTP 403 ou redirecionamento correto
 
 Elementos da UI correspondem ao nível do usuário
----
+
 ## 4. GESTÃO DE PROJETOS
 
 Objetivo: Testar criação, edição e associação de produtos.
@@ -249,7 +249,7 @@ Validação:
 Consultar banco: tabela projeto_produtos
 
 Comparar valores com entradas feitas
----
+
 ## 5. MOVIMENTAÇÕES DE ESTOQUE
 
 Objetivo: Registrar movimentação de produtos e validar cálculo.
@@ -271,7 +271,7 @@ Validação:
 Conferir campo estoque_atual no banco de dados
 
 Relatórios refletem movimentação corretamente
----
+
 ## 6. SEGURANÇA - Token JWT Inválido
 
 Objetivo: Testar proteção de endpoints com token inválido.
