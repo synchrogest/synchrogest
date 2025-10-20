@@ -15,12 +15,11 @@ app = FastAPI(
 
 # Configuração de CORS
 origins = [
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:3001",
-    "https://synchrogest-backend.onrender.com/"
     # "https://synchro-gest.render.app" #Colocar aqui o CORS CORRETO.
+    "https://app-synchrogest.onrender.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+
 ]
 
 app.add_middleware(

@@ -3,7 +3,7 @@ import axios from 'axios';
 // Criar instância do axios
 // A baseURL será tratada pelo proxy configurado no package.json
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL + "/api", // Usar URL relativa para o proxy funcionar
+  baseURL: `${process.env.REACT_APP_API_URL}/api`, // Usar URL relativa para o proxy funcionar
   maxRedirects: 5,  // Permitir até 5 redirecionamentos
   withCredentials: true  // Importante para preservar cookies em redirecionamentos
 });
