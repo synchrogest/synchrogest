@@ -7,7 +7,7 @@ if (base.endsWith("/")) {
 }
 
 const api = axios.create({
-  baseURL: `${base}/api`,
+  baseURL: base,
   timeout: 15000, // 15s para evitar travamentos
 });
 
