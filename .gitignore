@@ -81,7 +81,6 @@ dist/
 # ================================
 # SISTEMA / DEPLOY
 # ================================
-.vercel/
 .tmp/
 uploads/
 =======
@@ -89,9 +88,6 @@ uploads/
 .pypirc
 
 # Cursor
-#  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to
-#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
-#  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
 
@@ -104,6 +100,5 @@ __marimo__/
 scripts/criar_admin.py
 scripts/check_admin_db.py
 app/gerar_hash.py
-initial_data.py
-
->>>>>>> bc5a6bbd3056897c76cbebfb64532378a4743678
+create_admin.py
+create_user.py
