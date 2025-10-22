@@ -60,7 +60,6 @@ package-lock.json
 pnpm-lock.yaml
 
 # Build output
-build/
 dist/
 
 # Ambiente local
