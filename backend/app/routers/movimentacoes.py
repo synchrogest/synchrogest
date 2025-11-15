@@ -7,7 +7,6 @@ from sqlalchemy import desc
 from app.database import get_db
 from app.models.movimentacao import Movimentacao
 from app.models.produto import Produto
-from app.models.projeto import Projeto
 from app.models.usuario import Usuario
 from app.schemas.movimentacao import MovimentacaoCreate, MovimentacaoUpdate, Movimentacao as MovimentacaoSchema
 from app.services.auth import get_current_user
@@ -22,7 +21,6 @@ async def listar_movimentacoes(
     tipo: Optional[str] = None,
     data_inicio: Optional[date] = None,
     data_fim: Optional[date] = None,
-    projeto_id: Optional[int] = None,
     current_user: Usuario = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -44,8 +42,6 @@ async def listar_movimentacoes(
     if data_fim:
         query = query.filter(Movimentacao.data <= datetime.combine(data_fim, datetime.max.time()))
     
-    if projeto_id:
-        query = query.filter(Movimentacao.projeto_id == projeto_id)
     
     # Ordenar por data (mais recente primeiro)
     query = query.order_by(desc(Movimentacao.data))
@@ -69,16 +65,7 @@ async def criar_movimentacao(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Produto não encontrado"
-        )
-    
-    # Verificar se o projeto existe (se fornecido)
-    if movimentacao.projeto_id:
-        projeto = db.query(Projeto).filter(Projeto.id == movimentacao.projeto_id).first()
-        if not projeto:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="Projeto não encontrado"
-            )
+        ) 
     
     # Verificar se a quantidade é válida
     if movimentacao.quantidade <= 0:

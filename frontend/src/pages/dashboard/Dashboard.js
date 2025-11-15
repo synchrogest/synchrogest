@@ -2,29 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Spinner, Alert, ListGroup, Button, Modal } from 'react-bootstrap';
 import api from '../../services/api';
 import { FaBoxOpen, FaExclamationTriangle, FaProjectDiagram, FaHistory, FaInfoCircle } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
+
 
 const Dashboard = () => {
   const [produtosTotal, setProdutosTotal] = useState(0);
   const [produtosEstoqueBaixo, setProdutosEstoqueBaixo] = useState([]);
-  const [projetosAtivos, setProjetosAtivos] = useState([]);
+  const [vendasTotal, setVendasTotal] = useState([]);
   const [ultimasMovimentacoes, setUltimasMovimentacoes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Estados para controlar os modais
   const [showProdutosModal, setShowProdutosModal] = useState(false);
   const [showEstoqueBaixoModal, setShowEstoqueBaixoModal] = useState(false);
-  const [showProjetosModal, setShowProjetosModal] = useState(false);
-  
+  const [showVendasModal, setShowVendasModal] = useState(false);
+
   // Funções para abrir/fechar modais
   const handleCloseProdutos = () => setShowProdutosModal(false);
-  // const handleShowProdutos = () => setShowProdutosModal(true);
-  
+  const handleShowProdutos = () => setShowProdutosModal(true);
+
   const handleCloseEstoqueBaixo = () => setShowEstoqueBaixoModal(false);
   const handleShowEstoqueBaixo = () => setShowEstoqueBaixoModal(true);
-  
-  const handleCloseProjetos = () => setShowProjetosModal(false);
-  const handleShowProjetos = () => setShowProjetosModal(true);
+
+  const handleShowVendas = () => setShowVendasModal(true);
+  const handleCloseVendas = () => setShowVendasModal(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +36,7 @@ const Dashboard = () => {
         // Buscar todos os produtos para contar o total
         const resProdutos = await api.get('/produtos/');
         setProdutosTotal(resProdutos.data.length);
-        
+
         // Buscar produtos com estoque baixo
         const resEstoqueBaixo = await api.get('/produtos/');
         // Filtrar produtos com estoque baixo (quantidade < quantidade_minima)
@@ -42,15 +44,16 @@ const Dashboard = () => {
           produto => produto.quantidade < produto.quantidade_minima
         );
         setProdutosEstoqueBaixo(produtosBaixoEstoque);
-        
-        // Buscar projetos ativos (status = "em_andamento")
-        const resProjetos = await api.get('/projetos/');
-        // Filtrar projetos com status "em_andamento"
-        const projetosEmAndamento = resProjetos.data.filter(
-          projeto => projeto.status === 'em_andamento'
-        );
-        setProjetosAtivos(projetosEmAndamento);
-        
+
+        // Buscar vendas (status = "vendas_totais")
+        const resVendas = await api.get('/compras/');
+        setVendasTotal(resVendas.data);
+        // // Filtrar vendas com status "vendas_totais"
+        // const vendaTotal = resVendas.data.filter(
+        //   vendas => vendas.status === 'vendas_totais'
+        // );
+        // setVendasToatais(vendaTotal);
+
         // Buscar últimas movimentações (limitado a 5)
         const resMovimentacoes = await api.get('/movimentacoes/');
         // Ordenar por data (mais recente primeiro) e pegar as 5 primeiras
@@ -96,28 +99,28 @@ const Dashboard = () => {
       <h1 className="h3 mb-3">Dashboard</h1>
       <Row>
         <Col md={6} xl={3} className="mb-3">
-          <Card className="h-100">
-          {/* <Card className="h-100 dashboard-card" onClick={handleShowProdutos} style={{ cursor: 'pointer' }}> */}
-            <Card.Body>
-              <Row>
-                <Col xs={8}>
-                  <Card.Title className="text-muted mb-2">Produtos Cadastrados</Card.Title>
-                  <h4 className="mb-0">{produtosTotal}</h4>
-                </Col>
-                <Col xs={4} className="text-end">
-                  <FaBoxOpen size={28} className="text-primary" />
-                </Col>
-              </Row>
-              {/* <Row className="mt-3">
-                <Col>
-                  <Button variant="outline-primary" size="sm" className="w-100">
-                    <FaInfoCircle className="me-1" /> Ver Detalhes
-                  </Button>
-                </Col>
-              </Row> */}
-            </Card.Body>
-          </Card>
+            <Card className="h-100 dashboard-card" onClick={handleShowProdutos} style={{ cursor: 'pointer' }}>
+              <Card.Body>
+                <Row>
+                  <Col xs={8}>
+                    <Card.Title className="text-muted mb-2">Produtos</Card.Title>
+                    <h4 className="mb-0">{produtosTotal}</h4>
+                  </Col>
+                  <Col xs={4} className="text-end">
+                    <FaBoxOpen size={28} className="text-primary" />
+                  </Col>
+                </Row>
+                <Row className="mt-3">
+                  <Col>
+                    <Button variant="outline-primary" size="sm" className="w-100">
+                      <FaInfoCircle className="me-1" /> Ver Detalhes
+                    </Button>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
         </Col>
+
         <Col md={6} xl={3} className="mb-3">
           <Card className="h-100 dashboard-card" onClick={handleShowEstoqueBaixo} style={{ cursor: 'pointer' }}>
             <Card.Body>
@@ -141,15 +144,15 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col md={6} xl={3} className="mb-3">
-          <Card className="h-100 dashboard-card" onClick={handleShowProjetos} style={{ cursor: 'pointer' }}>
+          <Card className="h-100 dashboard-card" onClick={handleShowVendas} style={{ cursor: 'pointer' }}>
             <Card.Body>
               <Row>
                 <Col xs={8}>
-                  <Card.Title className="text-muted mb-2">Projetos Ativos</Card.Title>
-                  <h4 className="mb-0">{projetosAtivos.length}</h4>
+                  <Card.Title className="text-muted mb-2">Total de Vendas</Card.Title>
+                  <h4 className="mb-0">{vendasTotal.length}</h4>
                 </Col>
                 <Col xs={4} className="text-end">
-                  <FaProjectDiagram size={28} className="text-success" />
+                  <FaShoppingCart size={28} className="text-success" />
                 </Col>
               </Row>
               <Row className="mt-3">
@@ -169,6 +172,10 @@ const Dashboard = () => {
                 <Col xs={8}>
                   <Card.Title className="text-muted mb-2">Movimentações</Card.Title>
                   <h4 className="mb-0">Últimas {ultimasMovimentacoes.length}</h4>
+                  {/* <span className={`badge bg-${mov.tipo === 'entrada' ? 'success' : 'danger'}`}>
+                    {mov.tipo === 'entrada' ? 'Entrada' : 'Saída'}
+                  </span> */}
+
                 </Col>
                 <Col xs={4} className="text-end">
                   <FaHistory size={28} className="text-info" />
@@ -178,7 +185,7 @@ const Dashboard = () => {
           </Card>
         </Col>
       </Row>
-      
+
       {/* Seção de Movimentações (sempre visível) */}
       <Row>
         <Col md={12} className="mt-3">
@@ -207,32 +214,13 @@ const Dashboard = () => {
           </Card>
         </Col>
       </Row>
-      
-      {/* Modal de Produtos Cadastrados */}
-{/* Modal de Produtos Cadastrados */}
-<Modal show={showProdutosModal} onHide={handleCloseProdutos}>
-  {/* <Modal.Header closeButton>
-    <Modal.Title>
-      <FaBoxOpen className="me-2 text-primary" />
-      Produtos Cadastrados
-    </Modal.Title>
-  </Modal.Header>
-  <Modal.Body className="text-center">
-    <h2 className="display-4">{produtosTotal}</h2>
-    <p className="lead">Total de produtos no sistema</p>
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleCloseProdutos}>
-      Fechar
-    </Button>
-  </Modal.Footer> */}
-</Modal>
 
-      {/* <Modal show={showProdutosModal} onHide={handleCloseProdutos} size="lg">
+      {/* Modal de Produtos Cadastrados */}
+      <Modal show={showProdutosModal} onHide={handleCloseProdutos} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>
             <FaBoxOpen className="me-2 text-primary" />
-            Produtos Cadastrados
+            Produtos
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -258,8 +246,8 @@ const Dashboard = () => {
             Fechar
           </Button>
         </Modal.Footer>
-      </Modal> */}
-      
+      </Modal>
+
       {/* Modal de Produtos com Estoque Baixo */}
       <Modal show={showEstoqueBaixoModal} onHide={handleCloseEstoqueBaixo} size="lg">
         <Modal.Header closeButton>
@@ -307,54 +295,53 @@ const Dashboard = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      
-      {/* Modal de Projetos Ativos */}
-      <Modal show={showProjetosModal} onHide={handleCloseProjetos} size="lg">
+
+      {/* Modal de Tatal Vendas */}
+      <Modal show={showVendasModal} onHide={handleCloseVendas} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>
-            <FaProjectDiagram className="me-2 text-success" />
-            Projetos Ativos
+            <FaShoppingCart className="me-2 text-success" />
+            Vendas Realizadas
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Total de projetos ativos: <strong>{projetosAtivos.length}</strong></p>
+          <p>Total de Vendas: <strong>{vendasTotal.length}</strong></p>
           <ListGroup>
-            {projetosAtivos.length > 0 ? (
+            {vendasTotal.length > 0 ? (
               <>
                 <ListGroup.Item>
                   <Row className="fw-bold">
-                    <Col md={1}>ID</Col>
-                    <Col md={4}>Nome</Col>
-                    <Col md={3}>Local</Col>
-                    <Col md={2}>Início</Col>
-                    <Col md={2}>Status</Col>
+                    <Col md={2}>ID</Col>
+                    <Col md={4}>Cliente</Col>
+                    <Col md={3}>Data</Col>
+                    <Col md={3}>Status</Col>
                   </Row>
                 </ListGroup.Item>
-                {projetosAtivos.map(projeto => (
-                  <ListGroup.Item key={projeto.id}>
+                {vendasTotal.map(venda => (
+                  <ListGroup.Item key={venda.id}>
                     <Row>
-                      <Col md={1}>{projeto.id}</Col>
-                      <Col md={4}>{projeto.nome}</Col>
-                      <Col md={3}>{projeto.local || 'N/A'}</Col>
-                      <Col md={2}>{formatarData(projeto.data_inicio).split(' ')[0]}</Col>
-                      <Col md={2}>
-                        <span className="badge bg-success">Em Andamento</span>
+                      <Col md={2}>{venda.id}</Col>
+                      <Col md={4}>{venda.nome_cliente || venda.cliente_id}</Col>
+                      <Col md={3}>{formatarData(venda.data_compra).split(' ')[0]}</Col>
+                      <Col md={3}>
+                        <span className="badge bg-success">Finalizada</span>
                       </Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
               </>
             ) : (
-              <ListGroup.Item>Nenhum projeto ativo.</ListGroup.Item>
+              <ListGroup.Item>Nenhuma venda registrada.</ListGroup.Item>
             )}
           </ListGroup>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseProjetos}>
+          <Button variant="secondary" onClick={handleCloseVendas}>
             Fechar
           </Button>
         </Modal.Footer>
       </Modal>
+
     </Container>
   );
 };

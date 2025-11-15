@@ -17,7 +17,7 @@ class MovimentacaoUpdate(BaseModel):
 
 class Movimentacao(MovimentacaoBase):
     id: int
-    usuario_id: int
+    usuario_id: Optional[int] = None
     data: datetime
     
     class Config:

@@ -7,9 +7,10 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Produtos from './pages/produtos/Produtos';
 import Categorias from './pages/categorias/Categorias';
 import Movimentacoes from './pages/movimentacoes/Movimentacoes';
-import Projetos from './pages/projetos/Projetos';
 import Usuarios from './pages/auth/Usuarios';
-import Gerenciamento from './pages/gerenciamento/Gerenciamento';
+
+import Clientes from './pages/clientes/Clientes';
+import Vendas from './pages/vendas/Vendas';
 import NotFound from './pages/common/NotFound';
 
 // Componentes de layout
@@ -43,9 +44,10 @@ function App() {
         <Route path="produtos" element={<Produtos />} />
         <Route path="categorias" element={<Categorias />} />
         <Route path="movimentacoes" element={<Movimentacoes />} />
-        <Route path="projetos" element={<Projetos />} />
         <Route path="usuarios" element={<Usuarios />} />
-        <Route path="gerenciamento" element={<Gerenciamento />} />
+
+        <Route path="clientes" element={<Clientes />} />
+        <Route path="vendas" element={<Vendas />} />
       </Route>
 
       {/* Rota 404 */}

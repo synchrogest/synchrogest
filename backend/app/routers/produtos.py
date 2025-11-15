@@ -19,7 +19,7 @@ async def listar_produtos(
     limit: int = 100,
     categoria_id: Optional[int] = None,
     search: Optional[str] = None,
-    current_user: Usuario = Depends(get_current_user),
+    # current_user: Usuario = Depends(get_current_user), *(removido para deixar Público)
     db: Session = Depends(get_db)
 ):
     """
@@ -180,18 +180,6 @@ async def excluir_produto(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Produto não encontrado"
         )
-    
-    # Verificar se existem movimentações ou projetos associados a este produto
-    if produto.movimentacoes or produto.projeto_produtos:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Não é possível excluir produto com movimentações ou projetos associados"
-        )
-    
-    db.delete(produto)
-    db.commit()
-    
-    return None
 
     # Inserido novo endpoint a baixo
 

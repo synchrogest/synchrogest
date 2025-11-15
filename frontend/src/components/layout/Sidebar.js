@@ -48,19 +48,27 @@ const Sidebar = () => {
       </Nav.Link>
       <Nav.Link 
         as={NavLink} 
-        to="/projetos" 
+        to="/clientes" 
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}
       >
-        <FaProjectDiagram className="me-2" /> Projetos
+        <FaProjectDiagram className="me-2" /> Clientes
       </Nav.Link>
-      {/* Adicionar link para usuários se o usuário for admin - lógica a ser implementada */}
+      <Nav.Link 
+        as={NavLink} 
+        to="/vendas" 
+        className="d-flex align-items-center"
+        style={({ isActive }) => isActive ? activeStyle : undefined}
+      >
+        <FaProjectDiagram className="me-2" /> Vendas
+      </Nav.Link>
       <Nav.Link 
         as={NavLink} 
         to="/usuarios" 
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}
-      >
+      > 
+      
         <FaUsers className="me-2" /> Usuários
       </Nav.Link>
     </Nav>

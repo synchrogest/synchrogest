@@ -22,7 +22,6 @@ class Usuario(Base):
     
     # Relacionamentos
     movimentacoes = relationship("Movimentacao", back_populates="usuario")
-    projetos_responsavel = relationship("Projeto", back_populates="responsavel")
-    projetos_colaborador = relationship("ProjetoColaborador", back_populates="usuario")
-    gerenciamentos = relationship("Gerenciamento", back_populates="usuario")
+    # projetos_responsavel = relationship("Projeto", back_populates="responsavel")
+    # projetos_colaborador = relationship("ProjetoColaborador", back_populates="usuario")
 

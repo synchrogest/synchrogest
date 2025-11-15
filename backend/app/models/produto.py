@@ -24,4 +24,4 @@ class Produto(Base):
     # Relacionamentos
     categoria = relationship("Categoria", back_populates="produtos")
     movimentacoes = relationship("Movimentacao", back_populates="produto")
-    projeto_produtos = relationship("ProjetoProduto", back_populates="produto")
+   

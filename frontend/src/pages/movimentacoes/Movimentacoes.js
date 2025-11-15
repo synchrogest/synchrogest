@@ -7,7 +7,7 @@ import api from '../../services/api';
 const Movimentacoes = () => {
   const [movimentacoes, setMovimentacoes] = useState([]);
   const [produtos, setProdutos] = useState([]);
-  const [projetos, setProjetos] = useState([]); // Para filtro e modal
+  // const [projetos, setProjetos] = useState([]); // Para filtro e modal
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -65,20 +65,20 @@ const Movimentacoes = () => {
   };
 
   // Função para buscar projetos (para dropdown)
-  const fetchProjetos = async () => {
-    try {
-      const response = await api.get('/projetos/', { params: { limit: 1000 } }); // Buscar mais projetos para o select
-      setProjetos(response.data);
-    } catch (err) {
-      toast.error('Erro ao buscar projetos para o filtro/formulário.');
-      console.error(err);
-    }
-  };
+  // const fetchProjetos = async () => {
+  //   try {
+  //     const response = await api.get('/projetos/', { params: { limit: 1000 } }); // Buscar mais projetos para o select
+  //     setProjetos(response.data);
+  //   } catch (err) {
+  //     toast.error('Erro ao buscar projetos para o filtro/formulário.');
+  //     console.error(err);
+  //   }
+  // };
 
   // Buscar dados ao montar o componente e quando filtros mudam
   useEffect(() => {
     fetchProdutos();
-    fetchProjetos();
+    // fetchProjetos();
     fetchMovimentacoes();
   }, [filtroProduto, filtroTipo, filtroDataInicio, filtroDataFim, filtroProjeto]);
 
@@ -190,6 +190,7 @@ const Movimentacoes = () => {
               <option value="">Todos</option>
               <option value="entrada">Entrada</option>
               <option value="saida">Saída</option>
+              <option value="saida">Vendas</option>
             </Form.Select>
           </Form.Group>
         </Col>
@@ -212,15 +213,15 @@ const Movimentacoes = () => {
           </Form.Group>
         </Col>
         <Col md={3} sm={12} className="mb-2">
-          <Form.Group controlId="filtroProjeto">
-            <Form.Label>Projeto</Form.Label>
-            <Form.Select value={filtroProjeto} onChange={(e) => setFiltroProjeto(e.target.value)}>
+          {/* <Form.Group controlId="filtroVendas">
+            <Form.Label>Vendas</Form.Label>
+            <Form.Select value={filtroVendas} onChange={(e) => setFiltroVendas(e.target.value)}>
               <option value="">Todos</option>
-              {projetos.map(proj => (
-                <option key={proj.id} value={proj.id}>{proj.nome}</option>
+              {vendas.map(venda => (
+                <option key={venda.id} value={venda.id}>{venda.nome}</option>
               ))}
             </Form.Select>
-          </Form.Group>
+          </Form.Group> */}
         </Col>
       </Row>
 
@@ -243,7 +244,8 @@ const Movimentacoes = () => {
               <th>Tipo</th>
               <th>Qtd.</th>
               <th>Usuário</th>
-              <th>Projeto</th>
+              {/* <th>Vendas</th> */}
+              {/* <th>Cliente</th> */}
               <th>Observações</th>
             </tr>
           </thead>
@@ -265,7 +267,8 @@ const Movimentacoes = () => {
                   </td>
                   <td>{mov.quantidade}</td>
                   <td>{/* Placeholder: Buscar nome do usuário pelo mov.usuario_id */} ID: {mov.usuario_id}</td>
-                  <td>{mov.projeto_id ? (projetos.find(p => p.id === mov.projeto_id)?.nome || 'N/A') : '-'}</td>
+                  {/* <td>{mov.vendas_id ? (vendas.find(v => v.id === mov.vendas_id)?.nome || 'N/A') : '-'}</td> */}
+                  {/* <td>{mov.clientes_id ? (clientes.find(c => c.id === mov.clientes_id)?.nome || 'N/A') : '-'}</td> */}
                   <td>{mov.observacoes}</td>
                 </tr>
               ))
@@ -308,7 +311,7 @@ const Movimentacoes = () => {
                 </Form.Group>
               </Col>
             </Row>
-            <Form.Group className="mb-3" controlId="formMovProjeto">
+            {/* <Form.Group className="mb-3" controlId="formMovProjeto">
               <Form.Label>Projeto Associado (Opcional)</Form.Label>
               <Form.Select name="projeto_id" value={formData.projeto_id} onChange={handleFormChange}>
                 <option value="">Nenhum</option>
@@ -316,7 +319,7 @@ const Movimentacoes = () => {
                   <option key={proj.id} value={proj.id}>{proj.nome}</option>
                 ))}
               </Form.Select>
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className="mb-3" controlId="formMovObservacoes">
               <Form.Label>Observações (Opcional)</Form.Label>
               <Form.Control as="textarea" rows={3} name="observacoes" value={formData.observacoes} onChange={handleFormChange} />

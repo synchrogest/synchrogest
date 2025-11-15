@@ -27,7 +27,11 @@ from app import models  # Isso ativa o __init__.py com os modelos
 
 # ✅ Importação necessária dos modelos
 # Alembic precisa ver os modelos para funcionar com --autogenerate
-from app.models import usuario  # Ajuste o caminho se necessário
+#from app.models import usuario  # Ajuste o caminho se necessário
+from app.models.usuario import Usuario
+from app.models.clientes import Cliente
+from app.models.compra_clientes import CompraCliente
+from app.models import compra_clientes, compra_itens, produto, movimentacao
 
 # Define a metadata usada para geração automática
 target_metadata = Base.metadata

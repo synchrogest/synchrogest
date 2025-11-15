@@ -31,9 +31,9 @@ class ProdutoUpdate(BaseModel):
 
 class Produto(ProdutoBase):
     id: int
-    quantidade: int
-    data_criacao: datetime
-    data_atualizacao: datetime
+    quantidade: Optional[int] = None  # <-- permitir nulo
+    data_criacao: Optional[datetime] = None  # <-- permitir nulo
+    data_atualizacao: Optional[datetime] = None  # <-- permitir nulo
     
     class Config:
         orm_mode = True

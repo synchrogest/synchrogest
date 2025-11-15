@@ -89,18 +89,18 @@ const MainLayout = ({ children }) => {
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/projetos"
-              className={`mb-2 d-flex ${isActive('/projetos') ? 'active' : ''}`}
+              to="/clientes"
+              className={`mb-2 d-flex ${isActive('/clientes') ? 'active' : ''}`}
               style={{ whiteSpace: 'nowrap' }}
             >
-              <FaClipboardList className="me-3" /> Projetos
+              <FaClipboardList className="me-3" /> Clientes
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/gerenciamento"
-              className={`mb-2 ${isActive('/gerenciamento') ? 'active' : ''}`}
+              to="/vendas"
+              className={`mb-2 ${isActive('/vendas') ? 'active' : ''}`}
             >
-              <FaTasks className="me-2" /> Gerenciar
+              <FaTasks className="me-2" /> Vendas
             </Nav.Link>
             <Nav.Link
               as={Link}
@@ -153,11 +153,18 @@ const MainLayout = ({ children }) => {
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/projetos"
-                className={`mb-2 ${isActive('/projetos') ? 'active' : ''}`}
+                to="/clientes"
+                className={`mb-2 ${isActive('/clientes') ? 'active' : ''}`}
+              >
+                <FaClipboardList className="me-2" /> Clientes
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/vendas"
+                className={`mb-2 ${isActive('/vendas') ? 'active' : ''}`}
                 onClick={handleClose}
               >
-                <FaClipboardList className="me-2" /> Projetos
+                <FaClipboardList className="me-2" /> Vendas
               </Nav.Link>
               <Nav.Link
                 as={Link}
@@ -169,20 +176,12 @@ const MainLayout = ({ children }) => {
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/gerenciamento"
-                className={`mb-2 ${isActive('/gerenciamento') ? 'active' : ''}`}
-                onClick={handleClose}
               >
-                <FaTasks className="me-2" /> Gerenciar
               </Nav.Link>
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
 
-        {/* Conteúdo principal */}
-        {/* <div className="flex-grow-1 content-area">
-          {Outlet}
-        </div> */}
         <div className="flex-grow-1 content-area">
           <Outlet />
         </div>

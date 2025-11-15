@@ -1,74 +1,64 @@
-import axios from 'axios';
+import axios from "axios";
 
-// Criar instância do axios
-// A baseURL será tratada pelo proxy configurado no package.json
+// 🧹 Normaliza a URL da API para evitar barras duplas ou espaços
+let base = (process.env.REACT_APP_API_URL || "").trim();
+if (base.endsWith("/")) {
+  base = base.slice(0, -1);
+}
+
+// Adiciona /api como base para todas as requisições
 const api = axios.create({
-  baseURL: '/api', // Usar URL relativa para o proxy funcionar
-  maxRedirects: 5,  // Permitir até 5 redirecionamentos
-  withCredentials: true  // Importante para preservar cookies em redirecionamentos
+  baseURL: `${base}/api`,
+  timeout: 15000, // 15s para evitar travamentos
+  withCredentials: true, // Importante se usar cookies
 });
 
-// Preserva cabeçalhos em redirecionamentos
-api.defaults.maxRedirects = 5;
-api.defaults.withCredentials = true;
-
-// Interceptor para adicionar token de autenticação em todas as requisições
+// Interceptor: adiciona o token em todas as requisições
 api.interceptors.request.use(
-  config => {
-    const token = localStorage.getItem('@SynchroGest:token');
+  (config) => {
+    const token = localStorage.getItem("@SynchroGest:token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      // Importante: garantir que os cabeçalhos sejam preservados em redirecionamentos
-      config.headers['Cache-Control'] = 'no-cache';
-      config.headers['Pragma'] = 'no-cache';
     }
     return config;
   },
-  error => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
-
-// Interceptor para tratamento de erros nas respostas
-
-// api.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     // Tratamento de erro de autenticação (401)
-//     if (error.response && error.response.status === 401) {
-//       localStorage.removeItem('@SynchroGest:token');
-//       localStorage.removeItem('@SynchroGest:user');
-//       // Evitar loop de redirecionamento se já estiver no login
-//       if (window.location.pathname !== '/login') {
-//           window.location.href = '/login';
-//       }
-//     }
-//     return Promise.reject(error);
-//   }
-// );
-
+// Interceptor: trata erros globais (principalmente 401)
 api.interceptors.response.use(
-  response => response,
-  error => {
+  (response) => response,
+  (error) => {
     const { response, config } = error;
     if (response?.status === 401) {
-      // Se for rota de autenticação, força logout
-      if (config.url.includes('/auth/')) {
-        localStorage.removeItem('@SynchroGest:token');
-        localStorage.removeItem('@SynchroGest:user');
-        if (window.location.pathname !== '/login') {
-          window.location.href = '/login';
+      // Força logout somente se for erro de autenticação
+      if (config.url.includes("/auth/")) {
+        localStorage.removeItem("@SynchroGest:token");
+        localStorage.removeItem("@SynchroGest:user");
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login";
         }
       }
-      // SENÃO: deixe o erro para o componente decidir (modo somente leitura)
     }
     return Promise.reject(error);
   }
 );
 
+/**
+ * Função auxiliar para login (FastAPI espera x-www-form-urlencoded)
+ */
+export const login = async (email, password) => {
+  const data = new URLSearchParams();
+  data.append("username", email); // FastAPI espera "username"
+  data.append("password", password);
+
+  const response = await api.post("/auth/login", data, {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  });
+
+  return response.data;
+};
 
 export default api;
-
