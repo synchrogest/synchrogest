@@ -104,6 +104,13 @@ const MainLayout = ({ children }) => {
             </Nav.Link>
             <Nav.Link
               as={Link}
+              to="/pagamentos"
+              className={`mb-2 ${isActive('/pagamentos') ? 'active' : ''}`}
+            >
+              <FaTasks className="me-2" /> Pagamentos
+            </Nav.Link>
+            <Nav.Link
+              as={Link}
               to="/usuarios"
               className={`mb-2 ${isActive('/usuarios') ? 'active' : ''}`}
             >
@@ -165,6 +172,14 @@ const MainLayout = ({ children }) => {
                 onClick={handleClose}
               >
                 <FaClipboardList className="me-2" /> Vendas
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/pagamentos"
+                className={`mb-2 ${isActive('/pagamentos') ? 'active' : ''}`}
+                onClick={handleClose}
+              >
+                <FaClipboardList className="me-2" /> Pagamentos
               </Nav.Link>
               <Nav.Link
                 as={Link}

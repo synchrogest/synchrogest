@@ -18,5 +18,9 @@ class Cliente(Base):
     pais = Column(String(100), nullable=True)
     data_criacao = Column(DateTime, default=datetime.utcnow)
     data_atualizacao = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relacionamento
     compras = relationship("CompraCliente", back_populates="cliente")
+    pagamentos = relationship("Pagamento", back_populates="cliente")
+
 

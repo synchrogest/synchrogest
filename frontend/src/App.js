@@ -11,6 +11,7 @@ import Usuarios from './pages/auth/Usuarios';
 
 import Clientes from './pages/clientes/Clientes';
 import Vendas from './pages/vendas/Vendas';
+import Pagamentos from './pages/pagamentos/Pagamentos';
 import NotFound from './pages/common/NotFound';
 
 // Componentes de layout
@@ -48,6 +49,7 @@ function App() {
 
         <Route path="clientes" element={<Clientes />} />
         <Route path="vendas" element={<Vendas />} />
+        <Route path="pagamentos" element={<Pagamentos />} />
       </Route>
 
       {/* Rota 404 */}

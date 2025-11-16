@@ -20,7 +20,8 @@ class CompraItemResponse(BaseModel):
     preco_unitario: float
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
 
 class CompraClienteResponse(BaseModel):
     id: int
@@ -30,7 +31,8 @@ class CompraClienteResponse(BaseModel):
     valor_total: float
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
 
 
 class CompraCliente(BaseModel):
@@ -39,4 +41,5 @@ class CompraCliente(BaseModel):
     data_compra: datetime
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True

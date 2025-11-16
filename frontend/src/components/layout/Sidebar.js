@@ -64,6 +64,14 @@ const Sidebar = () => {
       </Nav.Link>
       <Nav.Link 
         as={NavLink} 
+        to="/pagamentos" 
+        className="d-flex align-items-center"
+        style={({ isActive }) => isActive ? activeStyle : undefined}
+      >
+        <FaProjectDiagram className="me-2" /> Pagamentos
+      </Nav.Link>
+      <Nav.Link 
+        as={NavLink} 
         to="/usuarios" 
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}

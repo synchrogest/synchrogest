@@ -14,3 +14,6 @@ class CompraCliente(Base):
     # Relacionamento com itens da compra
     itens = relationship("CompraItem", back_populates="compra", cascade="all, delete-orphan")
     cliente = relationship("Cliente", back_populates="compras")
+    pagamento = relationship("Pagamento", back_populates="compra", uselist=False)
+
+

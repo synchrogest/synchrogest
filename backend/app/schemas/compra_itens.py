@@ -14,7 +14,8 @@ class CompraItemCreate(CompraItemBase):
 class CompraItemResponse(CompraItemBase):
     id: int
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
 
 
 class CompraClienteCreate(BaseModel):
@@ -29,4 +30,5 @@ class CompraClienteResponse(BaseModel):
     valor_total: float
     itens: List[CompraItemResponse]
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True

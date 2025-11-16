@@ -1,10 +1,7 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, usuarios, categorias, produtos, movimentacoes
-from app.routers import clientes, compra_clientes, pagamentos  # 🔹 importa também pagamentos
-from app.routers.auth_cliente import router as auth_cliente_router
-from app.routers.cliente_publico import router as cliente_publico_router
+from app.routers import auth, usuarios, categorias, produtos, movimentacoes, projetos, gerenciamento
 
 # IMPORTANTE: criação automática de tabelas
 from app.database import Base, engine
@@ -23,10 +20,8 @@ app = FastAPI(
 origins = [
     "http://localhost:3000",
     "http://localhost:3001",
-    "http://localhost:5500",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
-    "http://127.0.0.1:5500",
     "https://synchrogest-backend.onrender.com/"
     "https://biscoito-pet-house.onrender.com"
     # "https://synchro-gest.render.app" #Colocar aqui o CORS CORRETO.
@@ -50,11 +45,9 @@ app.include_router(movimentacoes.router, prefix="/api/movimentacoes", tags=["Mov
 # # Rotas cliente
 app.include_router(auth_cliente_router, prefix="/api/auth/clientes", tags=["AuthCliente"])
 app.include_router(clientes.router, prefix="/api/clientes", tags=["Clientes"])
-app.include_router(compra_clientes.router, prefix="/api/compras", tags=["Compras"])
+app.include_router(compra_clientes_router, prefix="/api/compras", tags=["Compras"])
 app.include_router(cliente_publico_router, prefix="/api/public/clientes", tags=["CadastroCliente"])
 
-# 🔹 Rotas de pagamentos
-app.include_router(pagamentos.router, prefix="/api/pagamentos", tags=["Pagamentos"])
 
 # 🔹 Rotas de teste e status
 @app.get("/api/test")

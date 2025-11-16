@@ -36,7 +36,8 @@ class Produto(ProdutoBase):
     data_atualizacao: Optional[datetime] = None  # <-- permitir nulo
     
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
 
 
 class ProdutoStats(BaseModel):
@@ -44,4 +45,5 @@ class ProdutoStats(BaseModel):
     total_estoque_baixo: int
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
