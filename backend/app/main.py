@@ -27,9 +27,9 @@ origins = [
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
     "http://127.0.0.1:5500",
-    "https://synchrogest-backend.onrender.com/"
+    "https://synchrogest-app.onrender.com"
+    "https://app-synchrogest.onrender.com"
     "https://biscoito-pet-house.onrender.com"
-    # "https://synchro-gest.render.app" #Colocar aqui o CORS CORRETO.
 ]
 
 app.add_middleware(
