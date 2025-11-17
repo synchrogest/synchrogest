@@ -10,12 +10,6 @@ from app.config import settings  # 👈 Importa a URL correta
 config = context.config
 # config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL", config.get_main_option("sqlalchemy.url"))) # 1 Linha de código inserida
 
-#-- 3 Linhas
-# from dotenv import load_dotenv
-# import os
-# load_dotenv()
-#-- inseridas
-
 # Configura os loggers, se o arquivo de config estiver presente
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
@@ -32,6 +26,7 @@ from app.models.usuario import Usuario
 from app.models.clientes import Cliente
 from app.models.compra_clientes import CompraCliente
 from app.models import compra_clientes, compra_itens, produto, movimentacao
+from app.models.pagamentos import Pagamento
 
 # Define a metadata usada para geração automática
 target_metadata = Base.metadata

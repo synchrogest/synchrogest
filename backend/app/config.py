@@ -7,9 +7,6 @@ load_dotenv()
 print("Banco de dados:", os.getenv("DATABASE_URL"))
 print("SECRET_KEY:", os.getenv("SECRET_KEY"))
 
-# def get_database_url():
-#     return os.getenv("DATABASE_URL", "sqlite:///./synchrogest.db") (Verificar esta função)
-
 # load_dotenv(".env.admin") "segunda opção caso o código quebre
 class Settings(BaseSettings):
     """
@@ -23,10 +20,6 @@ class Settings(BaseSettings):
     ALGORITHM: str = os.getenv("ALGORITHM", "HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
     
-    # Configurar base de dados Render (Supabase BD)
-    # DATABASE_URL: str
-    # SUPABASE_URL: str = None
-    # SUPABASE_SERVICE_KEY: str = None
     
     # Configurações da aplicação
     APP_NAME: str = "SynchroGest"
